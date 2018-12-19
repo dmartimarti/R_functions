@@ -1,11 +1,13 @@
 # function to authomatically chose colours for plotting
 
-colsel = function(n, palette = pastel1, mode = 'ordered') {
+
+colsel = function(n = 3, palette = 'pastel1', mode = 'ordered') {
+	
+
 	# colour libraries
 	pastel1 = c('#247BA0', '#70C1B3', '#B2DBBF', '#FCFFA5', '#FF1654', '#A04F23', 
 		'#C17070', '#C18E70', '#C1C070', '#70C17B', '#70A9C1', '#7079C1', '#AE70C1', '#C17084')
 	
-
 	# 554 different colurs
 	total = c('#B0171F', '#DC143C', '#FFB6C1', '#FFAEB9', '#EEA2AD', '#CD8C95', '#8B5F65', 
 		'#FFC0CB', '#FFB5C5', '#EEA9B8', '#CD919E', '#8B636C', '#DB7093', '#FF82AB', '#EE799F', 
@@ -77,21 +79,49 @@ colsel = function(n, palette = pastel1, mode = 'ordered') {
 		'#303030', '#2E2E2E', '#2B2B2B', '#292929', '#262626', '#242424', '#212121', '#1F1F1F', 
 		'#1C1C1C', '#1A1A1A', '#171717', '#141414', '#121212', '#0F0F0F', '#0D0D0D', '#0A0A0A', 
 		'#080808', '#050505', '#030303')
-
+	
+	# initial variables
 	list = c()
+	
+	df = data.frame(
+		pastel1 = length(pastel1),
+		total = length(total))
 
+	# checks for suitability of options chosen
+	if (!(palette %in% names(df))) {
+        stop(paste(palette, "is not a valid palette name.\n Options are:\n", list(names(df))))
+    }
+
+    if (n > df[palette]) {
+        stop(paste("n too large, the max number of colours of", palette, "is ", as.character(df[palette]), "\n")) 
+    }
+
+    # main part of the function
 	if(mode == 'ordered') {
-		list = palette[1:n]
-		return(list)
-	}
 
+		if(palette == 'pastel1') {
+			list = pastel1[1:n]
+			return(list)
+		} else if(palette == 'total'){
+			vect = seq(1, length(total), by = floor(length(total)/n))[1:n]
+			list = total[vect]
+			return(list)
+		}
+	} else if(mode == 'random') {
+
+		if(palette == 'pastel1'){
+			list = sample(paste1, size = n)
+			return(list)
+		} else if(palette == 'total'){
+			list = sample(total, size = n)
+			return(list)
+		}
+	}
 }
 
 
 
-
-
-
+# test zone
 
 
 
