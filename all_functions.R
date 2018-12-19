@@ -115,7 +115,7 @@ colsel = function(n = 3, palette = 'pastel1', mode = 'ordered') {
 	} else if(mode == 'random') {
 
 		if(palette == 'pastel1'){
-			list = sample(paste1, size = n)
+			list = sample(pastel1, size = n)
 			return(list)
 		} else if(palette == 'total'){
 			list = sample(total, size = n)
@@ -123,3 +123,5 @@ colsel = function(n = 3, palette = 'pastel1', mode = 'ordered') {
 		}
 	}
 }
+
+
