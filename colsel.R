@@ -7,6 +7,9 @@ colsel = function(n = 3, palette = 'pastel1', mode = 'ordered') {
 	# colour libraries
 	pastel1 = c('#247BA0', '#70C1B3', '#B2DBBF', '#FCFFA5', '#FF1654', '#A04F23', 
 		'#C17070', '#C18E70', '#C1C070', '#70C17B', '#70A9C1', '#7079C1', '#AE70C1', '#C17084')
+
+	sat1 = c('#DB0071', '#001AB2', '#117700', '#D60A0A', '#22AEF4', '#DB5000', '#63667A', 
+		'#B600D6', '#D6990A', '#6019B7', '#00D30E', '#FF00D8', '#00BAE0', '#D86100', '#FFD623')
 	
 	# 554 different colurs
 	total = c('#B0171F', '#DC143C', '#FFB6C1', '#FFAEB9', '#EEA2AD', '#CD8C95', '#8B5F65', 
@@ -85,6 +88,7 @@ colsel = function(n = 3, palette = 'pastel1', mode = 'ordered') {
 	
 	df = data.frame(
 		pastel1 = length(pastel1),
+		sat1 = length(sat1),
 		total = length(total))
 
 	# checks for suitability of options chosen
@@ -106,6 +110,9 @@ colsel = function(n = 3, palette = 'pastel1', mode = 'ordered') {
 			vect = seq(1, length(total), by = floor(length(total)/n))[1:n]
 			list = total[vect]
 			return(list)
+		} else if(palette == 'sat1'){
+			list = sat1[1:n]
+			return(list)
 		}
 	} else if(mode == 'random') {
 
@@ -113,6 +120,9 @@ colsel = function(n = 3, palette = 'pastel1', mode = 'ordered') {
 			list = sample(pastel1, size = n)
 			return(list)
 		} else if(palette == 'total'){
+			list = sample(total, size = n)
+			return(list)
+		} else if(palette == 'sat1'){
 			list = sample(total, size = n)
 			return(list)
 		}
